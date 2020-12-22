@@ -6,10 +6,19 @@ const BadRequest = require('../errors/bad-request');
 const Unauthorized = require('../errors/unauthorized');
 
 module.exports.register = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10)
+  const {
+    email, password, firstName, secondName, middleName, birthDate, avatar,
+  } = req.body;
+
+  bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      email: req.body.email,
+      email,
       password: hash,
+      firstName,
+      secondName,
+      middleName,
+      birthDate: new Date(birthDate),
+      avatar,
     }))
     .then((user) => {
       res.status(201).send({

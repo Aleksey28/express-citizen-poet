@@ -7,7 +7,7 @@ const auth = require('./middlewares/auth');
 
 const { register, login } = require('./controllers/auth');
 
-const { requestLogger, errorLoger } = require('./middlewares/logger');
+// const { requestLogger, errorLoger } = require('./middlewares/logger');
 
 const { PORT = 3000, BASE_PATH } = process.env;
 const app = express();
@@ -24,16 +24,17 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(requestLogger);
+// app.use(requestLogger);
 app.post('/signup', register);
 app.post('/signin', login);
 app.use(auth);
 app.use('/petitions', require('./routes/petitions')); // добавился маршрут
 
-app.use(errorLoger);
+// app.use(errorLoger);
 app.use((err, req, res) => {
   const { statusCode = 500, message } = err;
   console.log(message);
+  console.log(res);
   res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
 });
 

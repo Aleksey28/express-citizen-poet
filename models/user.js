@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const isEmail = require('validator/lib/isEmail');
+const isURL = require('validator/lib/isURL');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -16,6 +17,36 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 8,
+  },
+  firstName: {
+    type: String,
+    required: true,
+    minLength: 2,
+    maxLength: 30,
+  },
+  secondName: {
+    type: String,
+    required: true,
+    minLength: 2,
+    maxLength: 30,
+  },
+  middleName: {
+    type: String,
+    required: false,
+    minLength: 2,
+    maxLength: 30,
+  },
+  birthDate: {
+    type: Date,
+    required: false,
+  },
+  avatar: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (v) => isURL(v),
+      message: 'Для аватара необходимо указать URL',
+    },
   },
 });
 
