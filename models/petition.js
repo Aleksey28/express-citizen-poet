@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const petitionSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -12,4 +12,4 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('post', postSchema);
+module.exports = mongoose.model('petition', petitionSchema);

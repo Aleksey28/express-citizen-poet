@@ -28,11 +28,12 @@ app.use(requestLogger);
 app.post('/signup', register);
 app.post('/signin', login);
 app.use(auth);
-app.use('/posts', require('./routes/posts')); // добавился маршрут
+app.use('/petitions', require('./routes/petitions')); // добавился маршрут
 
 app.use(errorLoger);
 app.use((err, req, res) => {
   const { statusCode = 500, message } = err;
+  console.log(message);
   res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
 });
 

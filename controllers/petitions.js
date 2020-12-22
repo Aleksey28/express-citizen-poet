@@ -1,6 +1,6 @@
-const Post = require('../models/post');
+const Post = require('../models/petition');
 
-module.exports.getPosts = (req, res, next) => {
+module.exports.getPetitions = (req, res, next) => {
   Post.find({})
     .then((posts) => res.send({ data: posts }))
     .catch((err) => next(err));
