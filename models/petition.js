@@ -13,6 +13,12 @@ const petitionSchema = new mongoose.Schema({
     maxLength: 1024,
     required: true,
   },
+  department: {
+    type: String,
+    minLength: 2,
+    maxLength: 30,
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',

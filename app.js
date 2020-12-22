@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
+const petitions = require('./routes/petitions');
 
 const auth = require('./middlewares/auth');
 
@@ -30,7 +31,7 @@ app.post('/signup', register);
 app.post('/signin', login);
 app.use(auth);
 app.use('/', users);
-app.use('/petitions', require('./routes/petitions')); // добавился маршрут
+app.use('/', petitions); // добавился маршрут
 
 app.use(errorLogger);
 app.use((err, req, res, next) => {
