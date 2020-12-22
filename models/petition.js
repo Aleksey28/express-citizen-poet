@@ -1,14 +1,45 @@
 const mongoose = require('mongoose');
 
 const petitionSchema = new mongoose.Schema({
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  title: {
+    type: String,
+    minLength: 2,
+    maxLength: 30,
     required: true,
   },
-  text: {
+  description: {
     type: String,
+    minLength: 2,
+    maxLength: 1024,
     required: true,
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
+  comments: [{
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+    text: {
+      type: String,
+    },
+    date: {
+      type: Date,
+      default: new Date(),
+    },
+  }],
+  createdAt: {
+    type: Date,
+    default: new Date(),
   },
 });
 
