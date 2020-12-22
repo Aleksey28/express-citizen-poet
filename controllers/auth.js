@@ -2,8 +2,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const BadRequest = require('../errors/bad-request');
+const Unauthorized = require('../errors/unauthorized');
 
-module.exports.register = (req, res) => {
+module.exports.register = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hash) => User.create({
       email: req.body.email,
@@ -16,12 +18,12 @@ module.exports.register = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err);
-      res.status(400).send(err);
+      next(new BadRequest(err.message));
+      // next(err);
     });
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -31,6 +33,7 @@ module.exports.login = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(401).send({ message: err.message });
+      next(new Unauthorized(err.message));
+      // next(err);
     });
 };
