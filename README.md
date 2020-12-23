@@ -141,4 +141,9 @@
         + comments[]
         + createdAt
 
+###Poems
+
++ GET http://178.154.224.210/poems?strToTranslate - get translate from strToTranslate
+    + Output
+        + translation
 
