@@ -1,8 +1,8 @@
 # The backend of the project "Citizen poet"
 
-##Description API
+## Description API
 
-###Registration and login to the system
+### Registration and login to the system
 
 + POST http://178.154.224.210/signup - registration user
     + Input
@@ -24,7 +24,7 @@
     + Output
         + token - user's token
 
-###User
+### User
 
 + GET http://178.154.224.210/users - get list of users
     + Output
@@ -61,7 +61,7 @@
         + birthDate
         + avatar
 
-###Petition
+### Petition
 
 + GET http://178.154.224.210/petitions - get list of petitions
     + Output
@@ -141,7 +141,7 @@
         + comments[]
         + createdAt
 
-###Poems
+### Poems
 
 + GET http://178.154.224.210/poems?strToTranslate - get translate from strToTranslate
     + Output
