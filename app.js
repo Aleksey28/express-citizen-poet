@@ -23,17 +23,25 @@ mongoose.connect('mongodb://localhost:27017/authdb', {
 });
 
 // Массив разешённых доменов
-const allowedCors = [
-  'https://aleksey28.github.io/citizen-poet/',
-  'http://localhost:3000',
-];
+// const allowedCors = [
+//   'https://aleksey28.github.io/citizen-poet/',
+//   'http://localhost:3000',
+// ];
+//
+// app.use((req, res, next) => {
+//   const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
+//
+//   if (allowedCors.includes(origin)) {
+//     res.header('Access-Control-Allow-Origin', origin);
+//   }
+//
+//   next();
+// });
 
 app.use((req, res, next) => {
-  const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
-
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 
   next();
 });
