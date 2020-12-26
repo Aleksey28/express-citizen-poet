@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/authdb', {
 // Массив разешённых доменов
 const allowedCors = [
   'https://aleksey28.github.io/citizen-poet/',
-  'localhost:3000',
+  'http://localhost:3000',
 ];
 
 app.use((req, res, next) => {
