@@ -22,10 +22,24 @@ mongoose.connect('mongodb://localhost:27017/authdb', {
   useUnifiedTopology: true,
 });
 
+// Массив разешённых доменов
+const allowedCors = [
+  'https://aleksey28.github.io/citizen-poet/',
+  'localhost:3000',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
+
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(requestLogger);
 app.post('/signup', register);
