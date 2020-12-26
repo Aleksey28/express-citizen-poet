@@ -4,6 +4,7 @@ const Unauthorized = require('../errors/unauthorized');
 const extractBearerToken = (header) => header.replace('Bearer ', '');
 
 module.exports = (req, res, next) => {
+  console.log(3);
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {

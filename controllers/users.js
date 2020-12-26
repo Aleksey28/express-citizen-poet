@@ -2,6 +2,7 @@ const User = require('../models/user');
 const NotFoundErr = require('../errors/not-found-err');
 
 const getUsers = (req, res, next) => {
+  console.log(5);
   User.find({})
     .then((data) => {
       res.send(data);

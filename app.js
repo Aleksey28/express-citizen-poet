@@ -16,22 +16,6 @@ const { PORT = 3000, BASE_PATH } = process.env;
 const app = express();
 app.use(cors());
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Credentials', 'true');
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-//   console.log(res);
-//   next();
-// });
-
 mongoose.connect('mongodb://localhost:27017/authdb', {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -39,41 +23,8 @@ mongoose.connect('mongodb://localhost:27017/authdb', {
   useUnifiedTopology: true,
 });
 
-// // Массив разешённых доменов
-// const allowedCors = [
-//   'https://aleksey28.github.io/citizen-poet/',
-//   'http://localhost:3001',
-// ];
-//
-// app.use((req, res, next) => {
-//   const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
-//
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', origin);
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-//   }
-//
-//   next();
-// });
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Credentials', 'true');
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-//   next();
-// });
-// app.use((req, res, next) => {
-//   res.header['Access-Control-Allow-Credentials'] = 'true';
-//   res.header['Access-Control-Allow-Origin'] = '*';
-//   res.header['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-//   res.header['Access-Control-Allow-Methods'] = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-//   next();
-// });
 
 app.use(requestLogger);
 app.post('/signup', register);
@@ -85,12 +36,13 @@ app.use('/', poems);
 
 app.use(errorLogger);
 app.use((err, req, res, next) => {
-  console.log(res);
+  console.log(4);
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
 });
 
 app.listen(PORT, () => {
   console.log('Ссылка на сервер:');
+  console.log(PORT);
   console.log(BASE_PATH);
 });
