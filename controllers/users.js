@@ -2,7 +2,6 @@ const User = require('../models/user');
 const NotFoundErr = require('../errors/not-found-err');
 
 const getUsers = (req, res, next) => {
-  console.log(5);
   User.find({})
     .then((data) => {
       res.send(data);
@@ -22,6 +21,8 @@ const getUser = (req, res, next) => {
 };
 
 const getUserInfo = (req, res, next) => {
+  console.log(req.user._id);
+  console.log(1);
   User.findById(req.user._id)
     .then((data) => {
       if (!data) {
@@ -33,6 +34,8 @@ const getUserInfo = (req, res, next) => {
 };
 
 const updateUserInfo = (req, res, next) => {
+  console.log(req.user._id);
+  console.log(2);
   const {
     email, firstName, secondName, middleName, birthDate, avatar,
   } = req.body;

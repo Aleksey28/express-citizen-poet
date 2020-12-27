@@ -6,7 +6,6 @@ const BadRequest = require('../errors/bad-request');
 const Unauthorized = require('../errors/unauthorized');
 
 module.exports.register = (req, res, next) => {
-  console.log(2);
   const {
     email, password, firstName, secondName, middleName, birthDate, avatar,
   } = req.body;
@@ -34,7 +33,6 @@ module.exports.register = (req, res, next) => {
 };
 
 module.exports.login = (req, res, next) => {
-  console.log(1);
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
