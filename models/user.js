@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: true,
+    required: false,
     validate: {
       validator: (v) => isURL(v),
       message: 'Для аватара необходимо указать URL',
