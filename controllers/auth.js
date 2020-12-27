@@ -9,8 +9,10 @@ const handleData = (data) => data.split('.').reverse().join('.');
 
 module.exports.register = (req, res, next) => {
   const {
-    email, password, firstName, secondName, middleName, birthDate, avatar,
+    password, firstName, secondName, middleName, birthDate, avatar,
   } = req.body;
+
+  const email = req.body.email.toLowerCase();
 
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
@@ -37,7 +39,7 @@ module.exports.register = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
-  return User.findUserByCredentials(email, password)
+  return User.findUserByCredentials(email.toLowerCase(), password)
     .then((user) => {
       res.send({
         token: jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '1d' }),
