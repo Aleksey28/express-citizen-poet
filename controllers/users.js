@@ -21,6 +21,17 @@ const getUser = (req, res, next) => {
     .catch(next);
 };
 
+const getUserInfo = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((data) => {
+      if (!data) {
+        throw new NotFoundErr('Нет пользователя с таким id');
+      }
+      res.send(data);
+    })
+    .catch(next);
+};
+
 const updateUserInfo = (req, res, next) => {
   const {
     email, firstName, secondName, middleName, birthDate, avatar,
@@ -47,5 +58,6 @@ const updateUserInfo = (req, res, next) => {
 module.exports = {
   getUsers,
   getUser,
+  getUserInfo,
   updateUserInfo,
 };
