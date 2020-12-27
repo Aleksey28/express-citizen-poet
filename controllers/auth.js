@@ -5,6 +5,8 @@ const User = require('../models/user');
 const BadRequest = require('../errors/bad-request');
 const Unauthorized = require('../errors/unauthorized');
 
+const handleData = (data) => data.split('.').reverse().join('.');
+
 module.exports.register = (req, res, next) => {
   const {
     email, password, firstName, secondName, middleName, birthDate, avatar,
@@ -17,7 +19,7 @@ module.exports.register = (req, res, next) => {
       firstName,
       secondName,
       middleName,
-      birthDate: new Date(birthDate),
+      birthDate: new Date(handleData(birthDate)),
       avatar,
     }))
     .then((user) => {
